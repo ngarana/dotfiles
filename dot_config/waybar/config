@@ -13,7 +13,6 @@
     "custom/textfive"
   ],
   "modules-center": [
-    "sway/window",
     "hyprland/window"
   ],
   "modules-right": [
@@ -24,11 +23,9 @@
     "network",
     "pulseaudio",
     "backlight",
-    "keyboard-state",
     "battery",
     "tray",
-    "clock",
-    "custom/lock"
+    "clock"
   ],
   "hyprland/workspaces": {
     "all-outputs": true,

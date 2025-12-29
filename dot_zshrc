@@ -132,7 +132,17 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+# Alias
+# ---- Zoxide (better cd) ----
+alias cd="z"
+alias vi="nvim"
+
+
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 export PATH=$PATH:/home/arch/.spicetify
+
+# ---- Zoxide (better cd) ----
+eval "$(zoxide init zsh)"
+
