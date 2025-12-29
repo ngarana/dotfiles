@@ -137,8 +137,6 @@ esac
 alias cd="z"
 alias vi="nvim"
 
-
-
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 export PATH=$PATH:/home/arch/.spicetify
