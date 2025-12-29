@@ -1,17 +1,18 @@
-{{- $email := promptStringOnce . "email" "What is your email address" -}}
-{{- $is_laptop := promptBoolOnce . "is_laptop" "Is this a laptop" -}}
-
 [data]
-    email = {{ $email | quote }}
-    is_laptop = {{ $is_laptop }}
-    osid = {{ .chezmoi.osRelease.id | quote }}
+    email = "stanford.githimu@court.go.ke"
+    name = "ngarana"
 
 [edit]
-    command = "nvim" # Arch users usually prefer nvim/vim
-    
+    command = "nvim" 
+
 [git]
     autoCommit = true
-    autoPush = false # Set to true if you want instant syncing to GitHub
+    autoPush = true
 
 [diff]
-    pager = "delta" # Highly recommended: 'sudo pacman -S git-delta'
+    exclude = ["scripts"]
+    pager = "delta"
+
+[merge]
+    command = "nvim"
+    args = ["-d", "{{ .Destination }}", "{{ .Source }}", "{{ .Target }}"]

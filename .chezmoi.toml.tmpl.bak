@@ -1,0 +1,17 @@
+{{- $email := promptStringOnce . "email" "What is your email address" -}}
+{{- $is_laptop := promptBoolOnce . "is_laptop" "Is this a laptop" -}}
+
+[data]
+    email = {{ $email | quote }}
+    is_laptop = {{ $is_laptop }}
+    osid = {{ .chezmoi.osRelease.id | quote }}
+
+[edit]
+    command = "nvim" # Arch users usually prefer nvim/vim
+    
+[git]
+    autoCommit = true
+    autoPush = false # Set to true if you want instant syncing to GitHub
+
+[diff]
+    pager = "delta" # Highly recommended: 'sudo pacman -S git-delta'
