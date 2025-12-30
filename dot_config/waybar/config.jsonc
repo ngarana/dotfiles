@@ -34,7 +34,7 @@
 
     "custom/notification": {
         "format": "",
-        "on-click": "dunst",
+        "on-click": "mako",
         "tooltip": "Notifications"
     },
     "custom/clipboard": {
