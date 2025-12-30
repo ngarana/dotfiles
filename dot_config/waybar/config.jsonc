@@ -8,6 +8,7 @@
     "spacing": 8, // Tighter spacing to match image
 
     "modules-left": [
+    	  "hyprland/workspaces",
         "custom/launcher",
         //"custom/settings",
         //"custom/store",
@@ -128,6 +129,24 @@
         "tooltip": "Power Menu"
     },
     // Left side definitions (kept simple for context)
+  // "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "1": "壹",
+      "2": "貳",
+      "3": "參",
+      "4": "肆",
+      "5": "伍",
+      "6": "陸",
+      "7": "柒",
+      "8": "捌",
+      "9": "玖",
+      "10": "拾",
+    },
+    "active": "",
+    "sort-by-number": true
+  },
     "custom/launcher": {"format": "", "on-click": "anyrun"},
     "custom/settings": {"format": "", "on-click": "gnome-control-center"},
     "custom/store": {"format": "", "on-click": "software-center"},
