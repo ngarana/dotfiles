@@ -28,8 +28,8 @@
         "idle_inhibitor",      // Monitor Screen
         "battery",             // Battery
         "custom/arrow",        // ^ Arrow
-        "clock"               // Time/Date
-        // "custom/power"         // Rectangle
+        "clock",               // Time/Date
+        "tray"
     ],
 
     // --- Right Side Module Definitions ---
@@ -133,11 +133,14 @@
              "on-scroll-down": "shift_down"
         }
     },
-    "custom/power": {
-        "format": "", // Rectangle/Square icon
-        "on-click": "wlogout",
-        "tooltip": "Power Menu"
-    },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10,
+    "icons": {
+        "blueman": "bluetooth",
+        "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+    }
+},
     // Left side definitions (kept simple for context)
    "hyprland/workspaces": {
     "format": "{icon}",
