@@ -65,6 +65,7 @@ tooltip label {
 /* Common spacing for right-side modules */
 #custom-notification,
 #custom-clipboard,
+#network,
 #pulseaudio,
 #backlight,
 #disk,
@@ -84,6 +85,8 @@ tooltip label {
 /* 3. Speaker (PulseAudio) */
 #pulseaudio { color: @blue; }
 #pulseaudio.muted { color: @gray; }
+
+#network {color: @purple;}
 
 /* 4. Brightness (Sun) */
 #backlight { color: @yellow; }
