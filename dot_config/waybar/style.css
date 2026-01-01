@@ -74,19 +74,33 @@ tooltip label {
 #idle_inhibitor,
 #battery,
 #custom-arrow,
-#tray {
-    padding: 0 6px;
-    color: @fg; /* Default creamy white for icons */
+/* NEW: Network Module */
+#network {
+    color: @purple; /* Gruvbox Purple */
+    padding: 0 10px;
+    font-size: 18px;
+}
+#network.disconnected {
+    color: @red;
 }
 
+/* NEW: Tray Module */
+#tray {
+    padding: 0 10px;
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @red;
+}
 /* 1. Notification Bell */
 #custom-notification { color: @purple; } 
 
 /* 3. Speaker (PulseAudio) */
 #pulseaudio { color: @blue; }
 #pulseaudio.muted { color: @gray; }
-
-#network { color: @purple; }
 
 /* 4. Brightness (Sun) */
 #backlight { color: @yellow; }
@@ -109,13 +123,6 @@ tooltip label {
     font-size: 12px;
     margin-right: 5px;
     margin-left: 5px;
-}
-
-/* 12. Power Rectangle */
-#custom-power {
-    color: @red;
-    font-size: 18px;
-    margin-right: 5px;
 }
 
 /* Animations */
