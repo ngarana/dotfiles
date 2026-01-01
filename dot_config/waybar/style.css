@@ -74,7 +74,7 @@ tooltip label {
 #idle_inhibitor,
 #battery,
 #custom-arrow,
-#custom-power {
+#tray {
     padding: 0 6px;
     color: @fg; /* Default creamy white for icons */
 }
@@ -86,7 +86,7 @@ tooltip label {
 #pulseaudio { color: @blue; }
 #pulseaudio.muted { color: @gray; }
 
-#network {color: @purple;}
+#network { color: @purple; }
 
 /* 4. Brightness (Sun) */
 #backlight { color: @yellow; }
