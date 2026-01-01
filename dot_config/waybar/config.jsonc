@@ -168,8 +168,6 @@
       },
 
     "custom/launcher": {"format": "", "on-click": "anyrun"},
-    "custom/settings": {"format": "", "on-click": "gnome-control-center"},
-    "custom/store": {"format": "", "on-click": "software-center"},
-    "custom/files": {"format": "", "on-click": "dolphin"},
+    "custom/files": {"format": "", "on-click": "pcmanfm-qt"},
     "custom/browser": {"format": "", "on-click": "firefox"}
 }
