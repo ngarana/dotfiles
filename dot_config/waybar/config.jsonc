@@ -6,39 +6,32 @@
     "margin-left": 10,
     "margin-right": 10,
     "spacing": 8, // Tighter spacing to match image
-
     "modules-left": [
-    	  "hyprland/workspaces",
-        "custom/launcher",
-        //"custom/settings",
-        //"custom/store",
-        "custom/files",
-        "custom/browser" 
+        "hyprland/workspaces"
     ],
     "modules-center": [],
     "modules-right": [
         "custom/notification", // Bell
-        "custom/clipboard",    // Clipboard
-        "network",
-        "pulseaudio",          // Speaker
-        "backlight",           // Sun
-        "disk",                // Hard Drive
-        "custom/kdeconnect",   // Smartphone
-        "hyprland/language",   // 'A' Symbol
-        "idle_inhibitor",      // Monitor Screen
-        "battery",             // Battery
-        "custom/arrow",        // ^ Arrow
-        "clock",               // Time/Date
-        "tray"
+        "custom/clipboard", // Clipboard
+        "tray",
+        //"bluetooth", // ^ Bluetooth
+        //"network",
+        "pulseaudio", // Speaker
+        "backlight", // Sun
+        "disk", // Hard Drive
+        "idle_inhibitor", // Monitor Screen
+        "battery", // Battery
+        "clock" // Time/Date
+
     ],
-
     // --- Right Side Module Definitions ---
+      "custom/notification": {
+            "tooltip": false,
+            "format": "",
+            "on-click": "swaync-client -t -sw",
+            "escape": true
+        },  
 
-    "custom/notification": {
-        "format": "",
-        "on-click": "mako",
-        "tooltip": "Notifications"
-    },
     "custom/clipboard": {
         "format": " ", // Clipboard icon
         "on-click": "cliphist list | rofi -dmenu | cliphist decode | wl-copy",
@@ -53,20 +46,24 @@
         "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
         "on-click": "nm-connection-editor" // or your preferred network manager
     },
-
-
     "pulseaudio": {
         "format": "{icon}",
         "format-muted": "",
         "format-icons": {
-            "default": ["", "", ""]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
         "on-click": "pavucontrol",
         "tooltip-format": "Volume: {volume}%"
     },
     "backlight": {
         "format": "{icon}",
-        "format-icons": ["", ""], // Sun icon
+        "format-icons": [
+        "", "", "", "", "", "", "", ""
+        ], // Sun icon
         "tooltip-format": "Brightness: {percent}%"
     },
     "disk": {
@@ -79,12 +76,7 @@
         "on-click": "kdeconnect-app",
         "tooltip": "KDE Connect"
     },
-    "hyprland/language": {
-        "format": "", // Use "A" or file icon closest to the image
-        "format-en": "A",
-        "format-sw": "S",
-        "tooltip": false
-    },
+
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -103,73 +95,89 @@
         "format-charging": "",
         "format-plugged": "",
         // The image shows a green battery. Styling is done in CSS.
-        "format-icons": ["", "", "", "", ""],
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
         "tooltip-format": "{capacity}% - {time}"
     },
-    "custom/arrow": {
-        "format": "", // The Up Arrow (^)
-        "tooltip": false
-    },
+        "bluetooth": {
+            "format-on": "󰂯",
+            "format-off": "󰂲",
+            "format-disabled": "󰂲",
+            "format-connected-battery": "󰂯",
+            "format-alt": "{device_alias} 󰂯",
+            "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+            "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+            "tooltip-format-enumerate-connected": "{device_alias}\n{device_address}",
+            "tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
+            "on-click-right": "blueman-manager"
+        }, 
     "clock": {
         // Double line format: Time on top, Date below
         "format": "{:%I:%M %p\n%m/%d/%y}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
-             "mode"          : "year",
-             "mode-mon-col"  : 3,
-             "weeks-pos"     : "right",
-             "on-scroll"     : 1,
-             "on-click-right": "mode",
-             "format": {
-                       "months":     "<span color='#ffead3'><b>{}</b></span>",
-                       "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                       "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                       "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-                       }
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
         },
-        "actions":  {
-             "on-click-right": "mode",
-             "on-click-forward": "tz_up",
-             "on-click-backward": "tz_down",
-             "on-scroll-up": "shift_up",
-             "on-scroll-down": "shift_down"
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
         }
     },
-  "tray": {
-    "icon-size": 18,
-    "spacing": 10,
-    "icons": {
-        "blueman": "bluetooth",
-        "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-    }
-},
-    // Left side definitions (kept simple for context)
-   "hyprland/workspaces": {
-    "format": "{icon}",
-    "on-click": "activate",
-    "format-icons": {
-      "1": "壹",
-      "2": "貳",
-      "3": "參",
-      "4": "肆",
-      "5": "伍",
-      "6": "陸",
-      "7": "柒",
-      "8": "捌",
-      "9": "玖",
-      "10": "拾",
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+        //"icons": {
+        //    "blueman": "bluetooth",
+        //    "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        //}
     },
-    "active": "",
-    "sort-by-number": true
-  },
-      "hyprland/window": {
-      "format": "{class}",
-      "max-length": 20,
-      "rewrite": {
-        "^(?!.*\\S).*": "Finder"
-      },
-
-    "custom/launcher": {"format": "", "on-click": "anyrun"},
-    "custom/files": {"format": "", "on-click": "pcmanfm-qt"},
-    "custom/browser": {"format": "", "on-click": "firefox"}
+    // Left side definitions (kept simple for context)
+    "hyprland/workspaces": {
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{icon}",
+        "show-special": false,
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": []
+        },
+        "format-icons": {
+            "active": " 󰮯 ",
+            "default": " 󰺕 ",
+            "empty": " ",
+            "urgent":" "
+        }
+    }
 }
+  		// "active": " ",
+		// "default": " "
+       //"format-icons": ["", "", "", "", "", "", "", "", ""]

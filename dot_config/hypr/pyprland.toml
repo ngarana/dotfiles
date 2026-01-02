@@ -34,11 +34,15 @@ include_special = false
 # size = "75% 40%"
 
 [scratchpads.term]
+name = "dropterm-rule"
 animation = "fromTop"
 command = "kitty --class kitty-dropterm"
 class = "kitty-dropterm"
 size = "88% 40%"
+# Ensure it hides when clicking away
 unfocus = "hide"
+# Optional: margin from the top to account for Waybar
+margin = 10
 
 [scratchpads.volume]
 animation = "fromRight"
