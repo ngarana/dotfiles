@@ -36,7 +36,5 @@ blur = true
 
 option_as_alt = "Both"
 
-#[font]
-#normal.family = "GeistMomo Nerd Font Mono"
-
-#size = 12
+[font]
+size = 11
