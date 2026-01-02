@@ -1,0 +1,83 @@
+# Main background (Gruvbox Dark0_Hard)
+theme[main_bg]="#1d2021"
+
+# Main text color (Gruvbox Light1)
+theme[main_fg]="#ebdbb2"
+
+# Title color for boxes (Gruvbox Light1)
+theme[title]="#ebdbb2"
+
+# Highlight color for keyboard shortcuts (Gruvbox Blue)
+theme[hi_fg]="#83a598"
+
+# Background color of selected item (Gruvbox Dark2)
+theme[selected_bg]="#504945"
+
+# Foreground color of selected item (Gruvbox Yellow)
+theme[selected_fg]="#fabd2f"
+
+# Color of inactive/disabled text (Gruvbox Gray)
+theme[inactive_fg]="#928374"
+
+# Color of text appearing on top of graphs (Gruvbox Orange)
+theme[graph_text]="#fe8019"
+
+# Background color of the percentage meters (Gruvbox Dark3)
+theme[meter_bg]="#665c54"
+
+# Misc colors (Gruvbox Orange)
+theme[proc_misc]="#fe8019"
+
+# CPU, Memory, Network, Proc box outline colors
+theme[cpu_box]="#b16286" # Purple
+theme[mem_box]="#98971a" # Green
+theme[net_box]="#fb4934" # Red
+theme[proc_box]="#458588" # Blue
+
+# Box divider line
+theme[div_line]="#7c6f64"
+
+# Temperature graph color (Green -> Yellow -> Red)
+theme[temp_start]="#98971a"
+theme[temp_mid]="#d79921"
+theme[temp_end]="#cc241d"
+
+# CPU graph colors (Aqua -> Blue)
+theme[cpu_start]="#8ec07c"
+theme[cpu_mid]="#83a598"
+theme[cpu_end]="#458588"
+
+# Mem/Disk free meter (Purple -> Blue)
+theme[free_start]="#d3869b"
+theme[free_mid]="#b16286"
+theme[free_end]="#83a598"
+
+# Mem/Disk cached meter (Aqua -> Blue)
+theme[cached_start]="#8ec07c"
+theme[cached_mid]="#83a598"
+theme[cached_end]="#458588"
+
+# Mem/Disk available meter (Orange -> Red)
+theme[available_start]="#fe8019"
+theme[available_mid]="#fb4934"
+theme[available_end]="#cc241d"
+
+# Mem/Disk used meter (Green -> Yellow)
+theme[used_start]="#b8bb26"
+theme[used_mid]="#fabd2f"
+theme[used_end]="#d79921"
+
+# Download graph colors (Orange -> Red)
+theme[download_start]="#fe8019"
+theme[download_mid]="#fb4934"
+theme[download_end]="#cc241d"
+
+# Upload graph colors (Green -> Aqua)
+theme[upload_start]="#b8bb26"
+theme[upload_mid]="#8ec07c"
+theme[upload_end]="#689d6a"
+
+# Process box gradient (Aqua -> Purple)
+theme[process_start]="#8ec07c"
+theme[process_mid]="#83a598"
+theme[process_end]="#d3869b"
