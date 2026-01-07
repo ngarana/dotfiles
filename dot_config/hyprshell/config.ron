@@ -17,23 +17,7 @@
                         show_execs: true,
                         show_actions_submenu: true,
                     ),
-                    terminal: (),
                     shell: None,
-                    websearch: (
-                        engines: [
-                            (
-                                url: "https://www.google.com/search?q={}",
-                                name: "Google",
-                                key: 'g',
-                            ),
-                            (
-                                url: "https://en.wikipedia.org/wiki/Special:Search?search={}",
-                                name: "Wikipedia",
-                                key: 'w',
-                            ),
-                        ],
-                    ),
-                    calc: (),
                     path: (),
                     actions: (
                         actions: [
