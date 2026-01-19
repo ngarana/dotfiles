@@ -144,3 +144,6 @@ export PATH=$PATH:/home/arch/.spicetify
 
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
+
+# opencode
+export PATH=/home/arch/.opencode/bin:$PATH
