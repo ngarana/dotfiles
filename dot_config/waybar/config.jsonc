@@ -7,7 +7,7 @@
     "margin-right": 10,
     "spacing": 8, // Tighter spacing to match image
     "modules-left": [
-        "hyprland/workspaces"
+        "ext/workspaces"
     ],
     "modules-center": [],
     "modules-right": [
@@ -18,7 +18,7 @@
         //"network",
         "pulseaudio", // Speaker
         "backlight", // Sun
-        "disk", // Hard Drive
+        "custom/kdeconnect", 
         "idle_inhibitor", // Monitor Screen
         "battery", // Battery
         "clock" // Time/Date
@@ -149,42 +149,25 @@
         //}
     },
     // Left side definitions (kept simple for context)
-    "hyprland/workspaces": {
+    "ext/workspaces": {
         "active-only": false,
         "all-outputs": true,
         "format": "{icon}",
-        "show-special": false,
+        "sort-by-id": true,
         "on-click": "activate",
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "persistent-workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": []
-        },
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
         "format-icons": {
-            "active": " 󰮯 ",
-            "default": " 󰺕 ",
-            "empty": " ",
-            "urgent":" "
+            "urgent":" ",
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九"
         }
     }
 }
-  		// "active": " ",
-		// "default": " "
-	//"format-icons": ["","","","","","","","","","","","","","",""],
-    //    "format-icons": [
-	// 	" ",
-	// 	" ",
-	// 	" ",
-	// 	"󰃝 ",
-	// 	"󰃞 ",
-	// 	"󰃟 ",
-	// 	"󰃠 "],

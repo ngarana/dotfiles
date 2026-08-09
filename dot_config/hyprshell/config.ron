@@ -1,4 +1,4 @@
-// Edit via `hyprshell config edit`, generate via `hyprshell config generate`
+// Edit with `hyprshell config edit`
 (
     version: 3,
     windows: (
@@ -17,7 +17,10 @@
                         show_execs: true,
                         show_actions_submenu: true,
                     ),
+                    terminal: None,
                     shell: None,
+                    websearch: None,
+                    calc: None,
                     path: (),
                     actions: (
                         actions: [
@@ -52,13 +55,17 @@
             modifier: "alt",
             filter_by: [],
             hide_filtered: false,
+            exclude_special_workspaces: "",
         ),
         switch: (
             modifier: "alt",
+            key: "Tab",
             filter_by: [
                 current_monitor,
             ],
-            switch_workspaces: false,
+            switch_workspaces: true,
+            exclude_special_workspaces: "",
         ),
+        switch_2: None,
     ),
 )

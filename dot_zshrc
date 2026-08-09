@@ -25,7 +25,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
-
+open() { setsid "$@" &>/dev/null & disown }
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
@@ -134,16 +134,47 @@ case ":$PATH:" in
 esac
 # pnpm end
 # Alias
+alias pandoc="pandoc -d ~/.local/share/pandoc/defaults.yaml"
 # ---- Zoxide (better cd) ----
-alias cd="z"
-alias vi="nvim"
-
+# alias cd="z"
+alias vi="vim"
+alias vim="nvim"
+alias vpn="sudo openfortivpn -c /etc/openfortivpn/config"
+alias code="codium-insiders"
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
+export CHROME_EXECUTABLE=/usr/bin/chromium
 export PATH=$PATH:/home/arch/.spicetify
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+
 
 # ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
-
+# eval "$(zoxide init zsh)"
+#export QT_QPA_PLATFORM=xcb
+#export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+#export _JAVA_OPTIONS="-Djava.net.preferIPv4Stack=true"
 # opencode
 export PATH=/home/arch/.opencode/bin:$PATH
+
+[ -f ~/.free-coding-models.env ] && . ~/.free-coding-models.env  # free-coding-models-env
+
+
+export PATH="/home/arch/Flutter/flutter:$PATH"
+# Added by Antigravity CLI installer
+export PATH="/home/arch/.local/bin:$PATH"
+export PATH="$PATH:$HOME/Flutter/flutter/bin"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
+
+# Qwen Code PATH block begin
+export PATH='/home/arch/.local/bin':$PATH
+# Qwen Code PATH block end
