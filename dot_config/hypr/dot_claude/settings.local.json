@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(hyprctl version *)",
+      "Bash(hyprctl getoption *)",
+      "Bash(hyprctl clients *)",
+      "Bash(hyprctl workspaces *)",
+      "Bash(python3 -c \"import json,sys; clients=json.load\\(sys.stdin\\); [print\\(c['class'], c['workspace']\\) for c in clients]\")",
+      "Bash(journalctl --user -n 50)",
+      "Bash(hyprctl dispatch *)",
+      "Bash(python3 -c \"import json,sys; clients=json.load\\(sys.stdin\\); [print\\(c['class'], c['workspace'], c['floating'], c['size']\\) for c in clients]\")",
+      "Bash(hyprctl monitors *)",
+      "Bash(python3 -c \"import json,sys; m=json.load\\(sys.stdin\\)[0]; print\\(m['width'], m['height']\\)\")",
+      "Bash(python3 -c \"import json,sys; [print\\(c\\) for c in json.load\\(sys.stdin\\) if c['class']=='dropterm']\")",
+      "Bash(hyprctl reload *)",
+      "Bash(python3 -c \"import json,sys; [print\\('size:', c['size'], 'at:', c['at']\\) for c in json.load\\(sys.stdin\\) if c['class']=='dropterm']\")",
+      "Bash(hyprctl rulestatus *)",
+      "Bash(hyprctl --help)",
+      "Bash(hyprctl workspacerules *)",
+      "Bash(python3 -c \"import json,sys; [print\\(c['class'], c['workspace']\\) for c in json.load\\(sys.stdin\\) if 'test' in c['class'] or 'drop' in c['class']]\")"
+    ]
+  }
+}

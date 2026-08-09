@@ -1,0 +1,5 @@
+-- hyprspaces-managed wiring
+-- hyprspaces-managed wiring for Hyprland's Lua config format.
+--
+-- require("hyprspaces-plugin-settings")
+-- require("hyprspaces-bindings")

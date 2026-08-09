@@ -1,0 +1,1 @@
+-- Reserved for event-driven rules that are not present in hyprland.conf.

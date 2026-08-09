@@ -1,0 +1,509 @@
+# See https://wiki.hypr.land/Configuring/Monitors/
+monitor=,preferred,auto,1
+
+
+###################
+### MY PROGRAMS ###
+###################
+
+$terminal = kitty
+$fileManager = pcmanfm-qt
+$menu = anyrun
+
+#################
+### AUTOSTART ###
+#################
+# 1. Sync environment FIRST to prevent app lag
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+#############################
+### ENVIRONMENT VARIABLES ###
+#############################
+env = XDG_CURRENT_DESKTOP,Hyprland
+env = XDG_SESSION_TYPE,wayland
+env = XDG_SESSION_DESKTOP,Hyprland
+env = QT_QPA_PLATFORMTHEME,qt6ct
+env = HYPRCURSOR_THEME,Qogir-Dark
+env = HYPRCURSOR_SIZE,24
+env = QT_QPA_PLATFORM, wayland;xcb
+# # Qt
+# env = QT_AUTO_SCREEN_SCALE_FACTOR,1
+# env = QT_SCALE_FACTOR,1
+# env = QT_QPA_PLATFORM,wayland
+# env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+# env = QT_QPA_PLATFORMTHEME,qt6ct
+# env = QT_QPA_PLATFORMTHEME,gtk3
+
+# # cursor
+# env = HYPRCURSOR_THEME,Qogir-Dark
+# env = XCURSOR_THEME,Qogir-Dark
+# env = QT_CURSOR_THEME,Qogir-Dark
+# env = QT_CURSOR_SIZE,24
+# env = XCURSOR_SIZE,18
+# env = HYPRCURSOR_SIZE,18
+
+# # GDK
+# env = GDK_BACKEND,wayland
+# env = GDK_SCALE,1
+
+# # Firefox
+# env = MOZ_ENABLE_WAYLAND,1
+
+#################
+### AUTOSTART ###
+#################
+# exec-once = ambxst
+exec-once = hyprpm reload
+exec-once = swayosd-server
+exec-once = hyprshell run &
+exec-once = systemctl --user start swaync
+exec-once = waybar
+exec-once = hypridle
+exec-once = udiskie --file-manager=pcmanfm-qt --no-automount
+exec-once = gnome-keyring-daemon --start --components=secrets
+exec-once = /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec-once = /usr/bin/pypr
+exec-once = gsettings set org.gnome.desktop.interface cursor-size 24
+exec-once = wl-paste --type text --watch cliphist store
+exec-once = wl-paste --type image --watch cliphist store
+exec-once = $HOME/.config/hypr/scripts/waybar_auto_hide &
+exec-once = awww-daemon &
+exec-once = blueman-applet
+exec-once = nm-applet
+  
+# Install (AUR)
+# yay -S hyprswitch
+# Then in your hyprland.conf:
+
+# Start daemon on login
+exec-once = hyprswitch init --show-title &
+# Launch the terminal once at startup into a hidden special workspace.
+# The --class flag is what the rules below match on.
+#exec-once = [workspace special:dropterm silent] kitty --class dropterm
+
+#####################
+### LOOK AND FEEL ###
+#####################
+
+general {
+    gaps_in = 4
+    gaps_out = 12, 8, 12, 8
+    border_size = 3    
+    col.active_border = rgb(458588) 
+    col.inactive_border = rgb(928374)
+    allow_tearing = true
+    layout = dwindle
+}
+
+decoration {
+    rounding = 12
+    rounding_power = 2
+    active_opacity = 1.0
+    inactive_opacity = 0.9
+    shadow {
+        enabled = false
+        range = 4
+        render_power = 3
+        color = rgba(1a1a1aee)
+    }
+    blur {
+        enabled = false
+        size = 5
+        passes = 2
+        vibrancy = 0.1696
+    }
+}
+animations {
+    enabled = yes
+    bezier = easeOutQuint, 0.23, 1, 0.32, 1
+    bezier = easeInOutCubic, 0.65, 0.05, 0.36, 1
+    bezier = linear, 0, 0, 1, 1
+    bezier = almostLinear, 0.5, 0.5, 0.75, 1
+    bezier = quick, 0.15, 0, 0.1, 1
+
+    animation = global, 1, 10, default
+    animation = border, 1, 5.39, easeOutQuint
+    animation = windows, 1, 4.79, easeOutQuint
+    animation = windowsIn, 1, 4.1, easeOutQuint, popin 87%
+    animation = windowsOut, 1, 1.49, linear, popin 87%
+    animation = fadeIn, 1, 1.73, almostLinear
+    animation = fadeOut, 1, 1.46, almostLinear
+    animation = fade, 1, 3.03, quick
+    animation = layers, 1, 3.81, easeOutQuint
+    animation = layersIn, 1, 4, easeOutQuint, fade
+    animation = layersOut, 1, 1.5, linear, fade
+    animation = workspaces, 1, 1.94, almostLinear, fade
+}
+
+
+
+# See https://wiki.hypr.land/Configuring/Dwindle-Layout/ for more
+#dwindle {
+#    pseudotile = true # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+#    preserve_split = true # You probably want this
+#}
+
+# See https://wiki.hypr.land/Configuring/Master-Layout/ for more
+master {
+    new_status = master
+}
+
+# https://wiki.hypr.land/Configuring/Variables/#misc
+misc {
+    force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
+    disable_hyprland_logo = false # If true disables the random hyprland logo / anime girl background. :(
+}
+
+
+#############
+### INPUT ###
+#############
+
+input {
+    kb_layout = us
+    follow_mouse = 1
+    sensitivity = 0
+    touchpad {
+        natural_scroll = false
+    }
+}
+
+gesture = 3, horizontal, workspace
+
+###################
+### KEYBINDINGS ###
+###################
+$mainMod = SUPER
+# bind = , Print, exec, quickshell -c HyprQuickFrame -n
+bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
+bind = $mainMod, Return, exec, alacritty
+bind = $mainMod SHIFT, Q, killactive
+bind = $mainMod, M, exit,
+bind = $mainMod, D, exec, $menu
+bind = $mainMod, P, pseudo,
+# bind = $mainMod, J, togglesplit,
+# bindr = SUPER, Super_L, hyprexpo:expo, toggle
+
+# Alt+Tab — open switcher / cycle forward
+bind = Alt, Tab, exec, hyprswitch gui --mod-key alt --key tab --max-switch-offset 9
+# Alt+Shift+Tab — cycle backward
+bind = Alt Shift, Tab, exec, hyprswitch gui --mod-key alt --key tab --reverse --max-switch-offset 9
+
+# Super+Tab toggles it
+bind = $mainMod, Tab, togglespecialworkspace, dropterm
+
+#bind = $mainMod, Tab, exec, pypr toggle term 
+bind = $mainMod, L, exec, ~/.config/qypr/lock.sh
+bind = $mainMod SHIFT, F, togglefloating,
+bind = $mainMod SHIFT, F, centerwindow,
+bind = $mainMod, F, fullscreen, 0
+bind = $mainMod Ctrl, F, fullscreenstate, 0 2
+
+# Focus & Workspaces
+bind = $mainMod, left, movefocus, l
+bind = $mainMod, right, movefocus, r
+bind = $mainMod, up, movefocus, u
+bind = $mainMod, down, movefocus, d
+
+bind = $mainMod, 1, workspace, 1
+bind = $mainMod, 2, workspace, 2
+bind = $mainMod, 3, workspace, 3
+bind = $mainMod, 4, workspace, 4
+bind = $mainMod, 5, workspace, 5
+bind = $mainMod, 6, workspace, 6
+bind = $mainMod, 7, workspace, 7
+bind = $mainMod, 8, workspace, 8
+bind = $mainMod, 9, workspace, 9
+bind = $mainMod, 0, workspace, 10
+
+# Moving Windows
+bind = $mainMod SHIFT, 1, movetoworkspace, 1
+bind = $mainMod SHIFT, 2, movetoworkspace, 2
+bind = $mainMod SHIFT, 3, movetoworkspace, 3
+bind = $mainMod SHIFT, 4, movetoworkspace, 4
+bind = $mainMod SHIFT, 5, movetoworkspace, 5
+bind = $mainMod SHIFT, 6, movetoworkspace, 6
+bind = $mainMod SHIFT, 7, movetoworkspace, 7
+bind = $mainMod SHIFT, 8, movetoworkspace, 8
+bind = $mainMod SHIFT, 9, movetoworkspace, 9
+bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+# Special Workspace
+bind = $mainMod, S, togglespecialworkspace, magic
+bind = $mainMod SHIFT, S, movetoworkspace, special:magic
+
+# Mouse Actions
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow
+
+#hymission Dispatchers
+# bind = SUPER, TAB, hymission:toggle
+# bind = SUPER SHIFT, TAB, hymission:open
+# bind = SUPER CTRL, TAB, hymission:close
+# bind = SUPER, C, hymission:toggle,onlycurrentworkspace
+# bind = SUPER, A, hymission:toggle,forceall
+# bind = SUPER, M, hymission:debug_current_layout
+
+# ─── Power Menu (Super+Escape) ───────────────────────────────────
+bind = $mainMod, Escape, exec, ~/.config/hypr/power-menu.sh
+
+submap = power
+bindi = , e, exec, hyprctl dispatch exit
+bindi = , l, exec, ~/.config/qypr/lock.sh
+bindi = , s, exec, systemctl suspend
+bindi = , p, exec, systemctl poweroff
+bindi = , h, exec, systemctl hibernate
+bindi = , r, exec, systemctl reboot
+bindi = , escape, submap, reset
+bindi = , catchall, submap, reset
+submap = reset
+
+# Multimedia Keys
+
+# With SwayOSD
+bindel = ,XF86AudioRaiseVolume, exec, swayosd-client --monitor "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')" --output-volume 5
+bindel = ,XF86AudioLowerVolume, exec, swayosd-client --monitor "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')" --output-volume -5
+bindel = ,XF86AudioMute, exec, swayosd-client --monitor "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')" --output-volume mute-toggle
+bindel = ,XF86MonBrightnessUp, exec, swayosd-client --monitor "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')" --brightness +5
+bindel = ,XF86MonBrightnessDown, exec, swayosd-client --monitor "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')" --brightness -5
+
+##############################
+### WINDOWS AND WORKSPACES ###
+##############################
+windowrule {
+    # Ignore maximize requests from all apps. You'll probably like this.
+    name = suppress-maximize-events
+    match:class = .*
+
+    suppress_event = maximize
+}
+# nm-connection-editor
+windowrule = match:class ^(nm-connection-editor)$, float on, size 500 600, center on
+
+# blueman-manager
+windowrule = match:class ^(blueman-manager)$, float on, size 500 300, center on
+
+windowrule {
+    # Fix some dragging issues with XWayland
+    name = fix-xwayland-drags
+    match:class = ^$
+    match:title = ^$
+    match:xwayland = true
+    match:float = true
+    match:fullscreen = false
+    match:pin = false
+
+    no_focus = true
+}
+
+# Hyprland-run windowrule
+windowrule {
+    name = move-hyprland-run
+    match:class = hyprland-run
+    move = 20 monitor_h-120
+    float = yes
+}
+
+# ─── Drop-down terminal (Yakuake-style) ──────────────────────────
+# Make it float, span the top portion of the screen, and slide in
+windowrule {
+    name = dropterm
+    match:class = ^(dropterm)$
+    float = yes
+    size = monitor_w monitor_h*0.4
+    move = 0 0
+    animation = slide
+}
+
+windowrule {
+    name = fix-dropterm-spawn
+    match:workspace = name:special:dropterm
+    match:class = negative:dropterm
+    workspace = +0
+}
+
+
+# Pyprland Dropdown Block
+#windowrule {
+#    name = pypr-dropterm
+#    match:class = kitty-dropterm
+#    float = yes
+#    # Defined location for "fromTop" transition
+#    move = 6% 0% 
+#}
+
+windowrule {
+    name = xdg-desktop
+    match:class = xdg-desktop-portal-gtk
+    float = yes
+    move = center
+}
+windowrule {
+    name = Gtk-look
+    match:class = nwg-look
+    float = yes
+    move = center
+}
+windowrule = float on, match:class ^(pcmanfm-qt)$
+
+windowrule {
+    name = Antigravity
+    match:class = [Aa]ntigravity
+    float = yes
+    move = center
+}
+# Floating PCManFM-Qt
+windowrule {
+    name = pcmanfm-main
+    match:class = pcmanfm-qt
+    float = yes
+    move = center
+}
+
+# Floating Spotify
+windowrule {
+    name = spotify-float
+    match:class = spotify
+    float = yes
+    move = center
+}
+windowrule = float on, match:class ^(spotify)$
+
+
+# Floating Picture-in-Picture
+windowrule {
+    name = picture-in-picture
+    match:title = Picture(-| )in(-| )[Pp]icture
+    float = yes
+    pin = true
+    size = 947 539
+    move = 100%-w-20 100%-h-20
+}
+
+# Floating VSCode Open Folder
+windowrule {
+    name = vscode-open-folder
+    match:class = codium-insiders
+    match:title = Open Folder
+    float = yes
+    move = center
+}
+
+windowrule = float on, match:class ^(codium-insiders)$, match:title ^(Manager)$
+
+
+
+# Generic Floating Dialogs
+windowrule {
+    name = generic-dialogs
+    match:title = (Select|Open)( a)? (File|Folder)(s)?
+    match:title = File (Operation|Upload)( Progress)?
+    match:title = Save As
+    match:title = Library
+    float = yes
+    move = center
+}
+
+windowrule {
+    name=floating-apps
+    match:class = (spotify|org.qbittorrent.qBittorrent|org.gnome.eog|org.gnome.Nautilus|mpv)
+    float = true
+    size = monitor_w*0.55 monitor_h*0.4
+    move = center
+
+}
+
+
+windowrule = match:class ^(pavucontrol)$, float on
+windowrule = match:class ^(pavucontrol)$, size (monitor_w*.45) (monitor_h*.45)
+windowrule = match:class ^(pavucontrol)$, center on
+windowrule = match:class ^(org.pulseaudio.pavucontrol)$, float on
+windowrule = match:class ^(org.pulseaudio.pavucontrol)$, size (monitor_w*.45) (monitor_h*.45)
+windowrule = match:class ^(org.pulseaudio.pavucontrol)$, center on
+
+
+
+# Smart Gaps Logic
+workspace = w[t1], gapsout:0, gapsin:0
+workspace = f[1], gapsout:0, gapsin:0
+
+windowrule {
+    name = smart-gaps-tiled
+    border_size = 0
+    rounding = 0
+}
+
+windowrule {
+    name = smart-gaps-fullscreen
+    border_size = 0
+    rounding = 0
+}
+windowrule = match:float 0, no_shadow on
+#layerrules
+layerrule = match:namespace rofi, ignore_alpha 0.9
+layerrule = match:namespace .*, xray on
+layerrule = match:namespace walker, no_anim on
+layerrule = match:namespace selection, no_anim on
+layerrule = match:namespace overview, no_anim on
+layerrule = match:namespace anyrun, no_anim on
+layerrule = match:namespace indicator.*, no_anim on
+layerrule = match:namespace osk, no_anim on
+layerrule = match:namespace hyprpicker, no_anim on
+layerrule = match:namespace logout_dialog # wlogout, blur on
+layerrule = match:namespace noanim, no_anim on
+layerrule = match:namespace gtk-layer-shell, blur on
+layerrule = match:namespace gtk-layer-shell, ignore_alpha 0
+layerrule = match:namespace launcher, blur on
+layerrule = match:namespace launcher, ignore_alpha 0.5
+layerrule = match:namespace notifications, blur on
+layerrule = match:namespace notifications, ignore_alpha 0.69
+###############
+### PLUGINS ###
+###############
+plugin {
+    #hyprexpo {
+    #    columns = 3
+    #    gap_size = 5
+    #    bg_col = rgb(282524)
+    #    workspace_method = center current
+    #    gesture_distance = 300
+    #}
+    borders-plus-plus {
+        add_borders = 2
+        col.border_1 = rgb(928374)
+        col.border_2 = rgb(98971a)
+        border_size_1 = 3
+        border_size_2 = 3
+        natural_rounding = yes
+    }
+    hyprbars {
+        # Gruvbox Dark Background (Hard: #264339ff, Soft: #32302f, Medium/Default: #282828)
+        bar_color = rgb(3c3836) 
+        
+        # Gruvbox Foreground (Text Color)
+        col.text = rgb(ebdbb2)
+
+        # Bar Settings
+        bar_height = 25
+        bar_text_size = 10
+        bar_text_font = JetBrains Mono Nerd Font # Optional: Match your font
+        bar_part_of_window = true
+        bar_precedence_over_border = true
+
+        # Buttons (Right to Left)
+        # Close Button (Gruvbox Red: #cc241d)
+        hyprbars-button = rgb(cc241d), 16, 󰖭, hyprctl dispatch killactive
+        # Maximize Button (Gruvbox Yellow: #d79921)
+        hyprbars-button = rgb(d79921), 16,  , hyprctl dispatch fullscreen 1
+        # Minimize Button (Gruvbox Yellow: #952ce5ff)
+        hyprbars-button = rgb(F7DCDE), 16, 󰖰, hyprctl dispatch movetoworkspacesilent special
+        
+    }
+}
+
+# Ambxst
+#source = ~/.local/share/ambxst/hyprland.conf
+
+# OVERRIDES
+# Down here you can write or source anything that you want to override from Ambxst's settings.
